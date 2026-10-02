@@ -1,30 +1,20 @@
-const path = require("path");
-
-require("dotenv").config({
-    path: path.join(__dirname, ".env")
-});
-
 const express = require("express");
 const { GoogleGenAI } = require("@google/genai");
 
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
-// Разрешаем JSON
+// Разрешаем принимать JSON
 app.use(express.json());
 
-// CORS
+// Разрешаем запросы с сайта
 app.use((req, res, next) => {
-    res.header(
-        "Access-Control-Allow-Origin",
-        "*"
-    );
-
+    res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Control-Allow-Methods",
         "GET, POST, OPTIONS"
     );
-
     res.header(
         "Access-Control-Allow-Headers",
         "Content-Type"
@@ -37,7 +27,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Проверяем API ключ
+// Проверяем API-ключ
 console.log(
     "API KEY:",
     process.env.GEMINI_API_KEY
@@ -45,7 +35,7 @@ console.log(
         : "КЛЮЧ НЕ НАЙДЕН"
 );
 
-// Главная страница
+// Проверка сервера
 app.get("/", (req, res) => {
     res.send("Центр Света - AI сервер работает!");
 });
@@ -61,22 +51,20 @@ app.post("/api/ai", async (req, res) => {
             });
         }
 
-        const apiKey = process.env.GEMINI_API_KEY;
-
-        if (!apiKey) {
+        if (!process.env.GEMINI_API_KEY) {
             return res.status(500).json({
                 error: "GEMINI_API_KEY не найден"
             });
         }
 
         const ai = new GoogleGenAI({
-            apiKey: apiKey
+            apiKey: process.env.GEMINI_API_KEY
         });
 
         const prompt = `
 Ты — профессиональный AI-консультант магазина «Центр Света» в Бишкеке.
 
-Твоя задача — помогать клиентам выбирать люстры и освещение.
+Помогай клиентам выбирать люстры и освещение.
 
 Учитывай:
 - размер комнаты;
@@ -87,11 +75,14 @@ app.post("/api/ai", async (req, res) => {
 - желаемый внешний вид;
 - бюджет клиента.
 
-Отвечай на русском языке.
+Отвечай только на русском языке.
 Будь дружелюбным, понятным и кратким.
-Не выдумывай конкретные товары, цены или наличие, если этих данных нет.
 
-Если клиент не сообщил важные параметры, задай ему уточняющий вопрос.
+Не выдумывай конкретные товары, цены или наличие,
+если такой информации нет.
+
+Если клиент не сообщил важные параметры,
+задай уточняющий вопрос.
 
 Вопрос клиента:
 ${message}
@@ -115,10 +106,11 @@ ${message}
     }
 });
 
-// Запуск сервера
+// Запускаем сервер
 app.listen(PORT, "0.0.0.0", () => {
     console.log("================================");
     console.log("ЦЕНТР СВЕТА - AI SERVER");
     console.log("================================");
     console.log("Сервер запущен на порту:", PORT);
 });
+```
