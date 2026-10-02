@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Центр Света — освещение в Бишкеке</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         ЗАСТАВКА
+    ========================== -->
+
+    <div class="loader" id="loader">
+
+        <div class="loader-glow"></div>
+
+        <div class="loader-content">
+
+            <div class="loader-logo">
+                <span>ЦЕНТР</span>
+                <strong>СВЕТА</strong>
+            </div>
+
+            <div class="loader-line"></div>
+
+            <p>ВАС ПРИВЕТСТВУЕТ ЦЕНТР СВЕТА</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ФОНОВАЯ АНИМАЦИЯ
+    ========================== -->
+
+    <canvas id="backgroundCanvas"></canvas>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+        <div class="container header-inner">
+
+            <a href="#home" class="logo">
+                <span>ЦЕНТР</span>
+                <strong>СВЕТА</strong>
+            </a>
+
+            <nav class="navigation">
+
+                <a href="#home">Главная</a>
+                <a href="#catalog">Каталог</a>
+                <a href="#about">О компании</a>
+                <a href="#contacts">Контакты</a>
+
+            </nav>
+
+            <a
+                href="https://wa.me/996559593159"
+                target="_blank"
+                class="header-button"
+            >
+                WhatsApp
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="container hero-inner">
+
+                <div class="hero-text">
+
+                    <div class="small-title">
+                        <span></span>
+                        ЦЕНТР СВЕТА · БИШКЕК
+                    </div>
+
+                    <h1>
+                        Свет,
+                        <br>
+                        который
+                        <span>создаёт</span>
+                        атмосферу.
+                    </h1>
+
+                    <p>
+                        Современное освещение для дома,
+                        бизнеса и стильных интерьеров.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#catalog"
+                            class="button button-primary"
+                        >
+                            Смотреть каталог
+                            <span>→</span>
+                        </a>
+
+                        <a
+                            href="#contacts"
+                            class="button button-secondary"
+                        >
+                            Связаться с нами
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="light-orbit orbit-one"></div>
+                    <div class="light-orbit orbit-two"></div>
+                    <div class="light-orbit orbit-three"></div>
+
+                    <div class="hero-lamp">
+
+                        <div class="lamp-wire"></div>
+
+                        <div class="lamp-top"></div>
+
+                        <div class="lamp-body"></div>
+
+                        <div class="lamp-glow"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             КАТЕГОРИИ
+        ========================== -->
+
+        <section class="categories-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            КАТЕГОРИИ
+                        </span>
+
+                        <h2>
+                            Найдите свой
+                            <span>свет</span>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Освещение для любого пространства
+                        и любого стиля.
+                    </p>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    <div class="category-card">
+                        <span class="category-number">01</span>
+                        <div class="category-icon">✦</div>
+                        <h3>Люстры</h3>
+                        <p>Главный акцент интерьера</p>
+                    </div>
+
+                    <div class="category-card">
+                        <span class="category-number">02</span>
+                        <div class="category-icon">◇</div>
+                        <h3>Подвесные</h3>
+                        <p>Стильные решения</p>
+                    </div>
+
+                    <div class="category-card">
+                        <span class="category-number">03</span>
+                        <div class="category-icon">◉</div>
+                        <h3>Бра</h3>
+                        <p>Мягкий дополнительный свет</p>
+                    </div>
+
+                    <div class="category-card">
+                        <span class="category-number">04</span>
+                        <div class="category-icon">◐</div>
+                        <h3>Торшеры</h3>
+                        <p>Уют и атмосфера</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             КАТАЛОГ
+        ========================== -->
+
+        <section class="catalog-section" id="catalog">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            КАТАЛОГ
+                        </span>
+
+                        <h2>
+                            Наши
+                            <span>светильники</span>
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Выберите подходящее освещение
+                        для вашего пространства.
+                    </p>
+
+                </div>
+
+
+                <!-- СЮДА ЗАГРУЖАЮТСЯ ТОВАРЫ -->
+
+                <div
+                    class="catalog-grid"
+                    id="catalogGrid"
+                >
+
+                    <div class="catalog-placeholder">
+
+                        <div class="placeholder-icon">
+                            ✦
+                        </div>
+
+                        <h3>
+                            Загрузка каталога...
+                        </h3>
+
+                        <p>
+                            Подождите немного.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             О КОМПАНИИ
+        ========================== -->
+
+        <section class="about-section" id="about">
+
+            <div class="container about-inner">
+
+                <div class="about-number-big">
+                    01
+                </div>
+
+                <div class="about-text">
+
+                    <span class="section-label">
+                        О КОМПАНИИ
+                    </span>
+
+                    <h2>
+                        Мы создаём
+                        <span>свет</span>
+                        для вашего пространства.
+                    </h2>
+
+                    <p>
+                        «Центр Света» — магазин освещения
+                        в Бишкеке. Здесь можно подобрать
+                        светильники для дома, квартиры,
+                        офиса, магазина и других помещений.
+                    </p>
+
+                    <p>
+                        Мы стремимся объединить современный
+                        дизайн, качество и большой выбор
+                        освещения в одном месте.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             КОНТАКТЫ
+        ========================== -->
+
+        <section class="contacts-section" id="contacts">
+
+            <div class="container">
+
+                <div class="contacts-box">
+
+                    <div>
+
+                        <span class="section-label">
+                            КОНТАКТЫ
+                        </span>
+
+                        <h2>
+                            Давайте
+                            <span>создадим свет</span>
+                            вместе.
+                        </h2>
+
+                        <p>
+                            Свяжитесь с нами,
+                            чтобы узнать больше.
+                        </p>
+
+                    </div>
+
+
+                    <div class="contacts-list">
+
+                        <a href="tel:+996559593159">
+
+                            <span>Телефон</span>
+
+                            <strong>
+                                +996 559 593 159
+                            </strong>
+
+                        </a>
+
+
+                        <a
+                            href="https://wa.me/996559593159"
+                            target="_blank"
+                        >
+
+                            <span>WhatsApp</span>
+
+                            <strong>
+                                Написать нам →
+                            </strong>
+
+                        </a>
+
+
+                        <div>
+
+                            <span>Адрес</span>
+
+                            <strong>
+                                Бишкек, ул. Шопокова, 89
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <div class="logo">
+
+                <span>ЦЕНТР</span>
+                <strong>СВЕТА</strong>
+
+            </div>
+
+            <p>
+                Современное освещение
+                для вашего пространства.
+            </p>
+
+            <span>
+                © 2026 Центр Света
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         ЗАГРУЗКА ТОВАРОВ ИЗ АДМИНКИ
+    ========================== -->
+
+    <script>
+
+        function loadCatalog() {
+
+            const catalogGrid =
+                document.getElementById("catalogGrid");
+
+
+            try {
+
+                /*
+                 * Берём товары из той же localStorage,
+                 * которую использует admin.html
+                 */
+
+                const savedProducts =
+                    localStorage.getItem(
+                        "centerLightProducts"
+                    );
+
+
+                const products =
+                    savedProducts
+                        ? JSON.parse(savedProducts)
+                        : [];
+
+
+                if (products.length === 0) {
+
+                    catalogGrid.innerHTML = `
+
+                        <div class="catalog-placeholder">
+
+                            <div class="placeholder-icon">
+                                ✦
+                            </div>
+
+                            <h3>
+                                Каталог пока пуст
+                            </h3>
+
+                            <p>
+                                Добавьте товары
+                                через админ-панель.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                catalogGrid.innerHTML =
+                    products.map(product => `
+
+                        <div class="product-card">
+
+                            <div class="product-image">
+
+                                <img
+                                    src="${escapeHtml(product.image)}"
+                                    alt="${escapeHtml(product.name)}"
+                                    onerror="this.src='https://images.unsplash.com/photo-1524484485831-a92ffc0de03f'"
+                                >
+
+                            </div>
+
+
+                            <div class="product-info">
+
+                                <span class="product-category">
+                                    ${escapeHtml(
+                                        product.category ||
+                                        "Освещение"
+                                    )}
+                                </span>
+
+
+                                <h3>
+                                    ${escapeHtml(
+                                        product.name
+                                    )}
+                                </h3>
+
+
+                                <p>
+                                    ${
+                                        escapeHtml(
+                                            product.description ||
+                                            "Современное освещение для вашего пространства."
+                                        )
+                                    }
+                                </p>
+
+
+                                <div class="product-bottom">
+
+                                    <strong>
+                                        ${
+                                            Number(
+                                                product.price || 0
+                                            ).toLocaleString("ru-RU")
+                                        }
+                                        сом
+                                    </strong>
+
+
+                                    <a
+                                        href="https://wa.me/996559593159?text=${encodeURIComponent(
+                                            "Здравствуйте! Меня интересует товар: " +
+                                            product.name
+                                        )}"
+                                        target="_blank"
+                                        class="product-button"
+                                    >
+                                        Узнать больше →
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `).join("");
+
+
+            } catch (error) {
+
+                console.error(
+                    "Ошибка загрузки каталога:",
+                    error
+                );
+
+
+                catalogGrid.innerHTML = `
+
+                    <div class="catalog-placeholder">
+
+                        <div class="placeholder-icon">
+                            !
+                        </div>
+
+                        <h3>
+                            Каталог временно недоступен
+                        </h3>
+
+                        <p>
+                            Не удалось загрузить товары.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /*
+         * Защищаем текст товара,
+         * чтобы специальные символы
+         * не ломали страницу.
+         */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /*
+         * Загружаем каталог
+         * после открытия страницы.
+         */
+
+        loadCatalog();
+
+
+        /*
+         * Если товар был добавлен
+         * в другой вкладке — обновляем каталог.
+         */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "centerLightProducts"
+                ) {
+
+                    loadCatalog();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- ОСНОВНОЙ JAVASCRIPT -->
+<!-- AI КОНСУЛЬТАНТ -->
+
+<div class="ai-button" id="aiButton">
+    ✨
+</div>
+
+<div class="ai-chat" id="aiChat">
+
+    <div class="ai-header">
+        <div>
+            <strong>AI-консультант</strong>
+            <span>Центр Света</span>
+        </div>
+
+        <button id="aiClose">×</button>
+    </div>
+
+    <div class="ai-messages" id="aiMessages">
+
+        <div class="ai-message ai-bot">
+            Здравствуйте! 👋<br><br>
+            Я AI-консультант «Центра Света».
+            Помогу подобрать освещение для вашего помещения.
+        </div>
+
+    </div>
+
+    <div class="ai-input-area">
+
+        <input
+            type="text"
+            id="aiInput"
+            placeholder="Например: какую люстру выбрать?"
+        >
+
+        <button id="aiSend">
+            →
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const aiButton = document.getElementById("aiButton");
+const aiChat = document.getElementById("aiChat");
+const aiClose = document.getElementById("aiClose");
+
+const aiInput = document.getElementById("aiInput");
+const aiSend = document.getElementById("aiSend");
+const aiMessages = document.getElementById("aiMessages");
+
+
+// Открыть чат
+aiButton.addEventListener("click", () => {
+
+    aiChat.classList.add("active");
+
+    aiInput.focus();
+
+});
+
+
+// Закрыть чат
+aiClose.addEventListener("click", () => {
+
+    aiChat.classList.remove("active");
+
+});
+
+
+// Отправка сообщения
+aiSend.addEventListener("click", sendAIMessage);
+
+
+// Отправка по Enter
+aiInput.addEventListener("keydown", (event) => {
+
+    if (event.key === "Enter") {
+
+        sendAIMessage();
+
+    }
+
+});
+
+
+async function sendAIMessage() {
+
+    const message = aiInput.value.trim();
+
+    if (!message) {
+        return;
+    }
+
+
+    // Сообщение пользователя
+    const userMessage = document.createElement("div");
+
+    userMessage.className = "ai-message ai-user";
+
+    userMessage.textContent = message;
+
+    aiMessages.appendChild(userMessage);
+
+
+    aiInput.value = "";
+
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+
+
+    // Сообщение загрузки
+    const loading = document.createElement("div");
+
+    loading.className = "ai-message ai-bot";
+
+    loading.textContent = "Думаю... ✨";
+
+    aiMessages.appendChild(loading);
+
+
+    try {
+
+        const response = await fetch(
+    "/api/ai",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message
+                })
+
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        loading.textContent =
+            data.answer || "Не удалось получить ответ.";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        loading.textContent =
+            "Не удалось подключиться к AI-серверу. Проверь, запущен ли server.js.";
+
+    }
+
+
+    aiMessages.scrollTop =
+        aiMessages.scrollHeight;
+
+}
+
+</script>
+    <script src="script.js"></script>
+
+</body>
+</html>

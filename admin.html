@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Админ-панель — Центр Света</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080808;
+            color: #fff;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(circle at center, #241c0b 0%, #080808 55%);
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 430px;
+            background: #111;
+            border: 1px solid #b99745;
+            padding: 40px;
+            box-shadow: 0 0 40px rgba(185, 151, 69, 0.15);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo h1 {
+            color: #d4af37;
+            font-size: 30px;
+            letter-spacing: 5px;
+        }
+
+        .login-logo p {
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            background: #191919;
+            border: 1px solid #444;
+            color: white;
+            outline: none;
+        }
+
+        .login-box input:focus {
+            border-color: #d4af37;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #d4af37;
+            color: #080808;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #f0d36b;
+        }
+
+        .login-error {
+            color: #ff5555;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* =========================
+           ADMIN
+        ========================= */
+
+        .admin {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #0d0d0d;
+            border-right: 1px solid #333;
+            padding: 25px 15px;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            color: #d4af37;
+            font-size: 21px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .menu {
+            margin-top: 25px;
+        }
+
+        .menu button {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 8px;
+            background: transparent;
+            color: #bbb;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .menu button:hover,
+        .menu button.active {
+            background: #1b180f;
+            color: #d4af37;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 15px;
+            width: calc(100% - 30px);
+            padding: 13px;
+            background: transparent;
+            border: 1px solid #555;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 28px;
+            color: #d4af37;
+        }
+
+        .topbar span {
+            color: #888;
+        }
+
+        /* =========================
+           PAGES
+        ========================= */
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: #111;
+            border: 1px solid #292929;
+            padding: 25px;
+        }
+
+        .stat-card h3 {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card strong {
+            font-size: 32px;
+            color: #d4af37;
+        }
+
+        /* =========================
+           PRODUCTS
+        ========================= */
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            color: #fff;
+        }
+
+        .gold-btn {
+            padding: 12px 20px;
+            background: #d4af37;
+            color: #080808;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .gold-btn:hover {
+            background: #f0d36b;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #111;
+            border: 1px solid #292929;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            background: #181818;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-category {
+            color: #d4af37;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 42px;
+        }
+
+        .product-price {
+            color: #d4af37;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            flex: 1;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid #444;
+            background: transparent;
+        }
+
+        .edit-btn {
+            color: #d4af37;
+        }
+
+        .delete-btn {
+            color: #ff6666;
+        }
+
+        .edit-btn:hover {
+            background: #29230f;
+        }
+
+        .delete-btn:hover {
+            background: #291010;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-box {
+            max-width: 750px;
+            background: #111;
+            border: 1px solid #292929;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #bbb;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            background: #191919;
+            border: 1px solid #444;
+            color: white;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #d4af37;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cancel-btn {
+            padding: 13px 25px;
+            background: transparent;
+            border: 1px solid #555;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        /* =========================
+           ORDERS
+        ========================= */
+
+        .orders-box {
+            background: #111;
+            border: 1px solid #292929;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #292929;
+            text-align: left;
+        }
+
+        th {
+            color: #d4af37;
+            font-weight: normal;
+        }
+
+        td {
+            color: #bbb;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px;
+            color: #777;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 200;
+            padding: 10px 15px;
+            background: #d4af37;
+            color: #080808;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1000px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding-right: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div class="login-screen" id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            <h1>ЦЕНТР СВЕТА</h1>
+            <p>Административная панель</p>
+        </div>
+
+        <input
+            type="text"
+            id="login"
+            placeholder="Логин"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Пароль"
+        >
+
+        <button class="login-btn" onclick="loginAdmin()">
+            ВОЙТИ
+        </button>
+
+        <div class="login-error" id="loginError">
+            Неверный логин или пароль
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADMIN PANEL
+========================= -->
+
+<div class="admin" id="adminPanel">
+
+    <button
+        class="mobile-menu-btn"
+        onclick="toggleMenu()"
+    >
+        ☰
+    </button>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-logo">
+            ЦЕНТР СВЕТА
+        </div>
+
+        <div class="menu">
+
+            <button
+                class="active"
+                onclick="showPage('dashboard', this)"
+            >
+                📊 Главная
+            </button>
+
+            <button
+                onclick="showPage('products', this)"
+            >
+                💡 Товары
+            </button>
+
+            <button
+                onclick="showPage('addProduct', this)"
+            >
+                ➕ Добавить товар
+            </button>
+
+            <button
+                onclick="showPage('orders', this)"
+            >
+                📦 Заказы
+            </button>
+
+        </div>
+
+        <button
+            class="logout"
+            onclick="logoutAdmin()"
+        >
+            Выйти
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <h1 id="pageTitle">
+                    Панель управления
+                </h1>
+
+                <span>
+                    Центр Света
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================= -->
+
+        <section
+            class="page active"
+            id="dashboard"
+        >
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <h3>ТОВАРОВ</h3>
+                    <strong id="productsCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <h3>ЗАКАЗОВ</h3>
+                    <strong id="ordersCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <h3>ИЗБРАННОЕ</h3>
+                    <strong id="favoritesCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <h3>КАТЕГОРИЙ</h3>
+                    <strong id="categoriesCount">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+
+                <h2>
+                    Последние товары
+                </h2>
+
+                <button
+                    class="gold-btn"
+                    onclick="showPageById('addProduct')"
+                >
+                    + Добавить
+                </button>
+
+            </div>
+
+            <div
+                class="products-grid"
+                id="dashboardProducts"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUCTS
+        ========================= -->
+
+        <section
+            class="page"
+            id="products"
+        >
+
+            <div class="section-title">
+
+                <h2>
+                    Все товары
+                </h2>
+
+                <button
+                    class="gold-btn"
+                    onclick="showPageById('addProduct')"
+                >
+                    + Добавить товар
+                </button>
+
+            </div>
+
+            <div
+                class="products-grid"
+                id="productsGrid"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             ADD PRODUCT
+        ========================= -->
+
+        <section
+            class="page"
+            id="addProduct"
+        >
+
+            <div class="section-title">
+
+                <h2 id="formTitle">
+                    Добавить товар
+                </h2>
+
+            </div>
+
+
+            <div class="form-box">
+
+                <form id="productForm">
+
+                    <div class="form-group">
+
+                        <label>
+                            Название товара
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            placeholder="Например: Люстра Золотой шар"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Цена, сом
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            placeholder="8500"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Категория
+                        </label>
+
+                        <select
+                            id="productCategory"
+                            required
+                        >
+
+                            <option value="">
+                                Выберите категорию
+                            </option>
+
+                            <option value="Люстры">
+                                Люстры
+                            </option>
+
+                            <option value="Подвесные">
+                                Подвесные
+                            </option>
+
+                            <option value="Бра">
+                                Бра
+                            </option>
+
+                            <option value="Торшеры">
+                                Торшеры
+                            </option>
+
+                            <option value="Светильники">
+                                Светильники
+                            </option>
+
+                            <option value="Потолочные">
+                                Потолочные
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Ссылка на изображение
+                        </label>
+
+                        <input
+                            type="url"
+                            id="productImage"
+                            placeholder="https://..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Описание
+                        </label>
+
+                        <textarea
+                            id="productDescription"
+                            placeholder="Описание товара..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            class="gold-btn"
+                            id="submitProductButton"
+                        >
+                            ДОБАВИТЬ ТОВАР
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-btn"
+                            onclick="cancelEdit()"
+                        >
+                            ОТМЕНА
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ORDERS
+        ========================= -->
+
+        <section
+            class="page"
+            id="orders"
+        >
+
+            <div class="section-title">
+
+                <h2>
+                    Заказы
+                </h2>
+
+            </div>
+
+            <div class="orders-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Товар</th>
+                            <th>Имя</th>
+                            <th>Телефон</th>
+                            <th>Дата</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="ordersTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       НАСТРОЙКИ ВХОДА
+    ========================= */
+
+    const ADMIN_LOGIN = "admin";
+
+    const ADMIN_PASSWORD =
+        "CentrSveta_2026!Admin#K9";
+
+
+    /* =========================
+       ДАННЫЕ
+    ========================= */
+
+    let products = [];
+
+    let favorites = [];
+
+    let orders = [];
+
+    let editingProductId = null;
+
+
+    /* =========================
+       ВХОД
+    ========================= */
+
+    function loginAdmin() {
+
+        const login =
+            document.getElementById("login").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+
+        if (
+            login === ADMIN_LOGIN &&
+            password === ADMIN_PASSWORD
+        ) {
+
+            localStorage.setItem(
+                "centerLightAdmin",
+                "true"
+            );
+
+            document.getElementById(
+                "loginScreen"
+            ).style.display = "none";
+
+            document.getElementById(
+                "adminPanel"
+            ).style.display = "block";
+
+            loadData();
+
+        } else {
+
+            document.getElementById(
+                "loginError"
+            ).style.display = "block";
+
+        }
+
+    }
+
+
+    /* =========================
+       ENTER ДЛЯ ВХОДА
+    ========================= */
+
+    document
+        .getElementById("password")
+        .addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                loginAdmin();
+            }
+
+        });
+
+
+    /* =========================
+       ВЫХОД
+    ========================= */
+
+    function logoutAdmin() {
+
+        localStorage.removeItem(
+            "centerLightAdmin"
+        );
+
+        location.reload();
+
+    }
+
+
+    /* =========================
+       ЗАГРУЗКА ДАННЫХ
+    ========================= */
+
+    function loadData() {
+
+        const savedProducts =
+            localStorage.getItem(
+                "centerLightProducts"
+            );
+
+        const savedFavorites =
+            localStorage.getItem(
+                "centerLightFavorites"
+            );
+
+        const savedOrders =
+            localStorage.getItem(
+                "centerLightOrders"
+            );
+
+
+        products = savedProducts
+            ? JSON.parse(savedProducts)
+            : [];
+
+        favorites = savedFavorites
+            ? JSON.parse(savedFavorites)
+            : [];
+
+        orders = savedOrders
+            ? JSON.parse(savedOrders)
+            : [];
+
+
+        updateDashboard();
+
+    }
+
+
+    /* =========================
+       СОХРАНЕНИЕ ТОВАРОВ
+    ========================= */
+
+    function saveProducts() {
+
+        localStorage.setItem(
+            "centerLightProducts",
+            JSON.stringify(products)
+        );
+
+    }
+
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
+    function updateDashboard() {
+
+        document.getElementById(
+            "productsCount"
+        ).textContent = products.length;
+
+
+        document.getElementById(
+            "ordersCount"
+        ).textContent = orders.length;
+
+
+        document.getElementById(
+            "favoritesCount"
+        ).textContent = favorites.length;
+
+
+        const categories =
+            new Set(
+                products.map(product => product.category)
+            );
+
+        document.getElementById(
+            "categoriesCount"
+        ).textContent = categories.size;
+
+
+        renderProducts();
+
+        renderDashboardProducts();
+
+        renderOrders();
+
+    }
+
+
+    /* =========================
+       КАРТОЧКА ТОВАРА
+    ========================= */
+
+    function createProductCard(product) {
+
+        return `
+
+            <div class="product-card">
+
+                <img
+                    class="product-image"
+                    src="${escapeHtml(product.image)}"
+                    alt="${escapeHtml(product.name)}"
+                    onerror="this.src='https://via.placeholder.com/600x400/111111/d4af37?text=ЦЕНТР+СВЕТА'"
+                >
+
+                <div class="product-info">
+
+                    <div class="product-category">
+                        ${escapeHtml(product.category)}
+                    </div>
+
+                    <h3>
+                        ${escapeHtml(product.name)}
+                    </h3>
+
+                    <div class="product-description">
+                        ${escapeHtml(product.description || "Описание отсутствует")}
+                    </div>
+
+                    <div class="product-price">
+                        ${Number(product.price).toLocaleString("ru-RU")} сом
+                    </div>
+
+                    <div class="product-actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editProduct(${product.id})"
+                        >
+                            ✏️ Изменить
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteProduct(${product.id})"
+                        >
+                            🗑️ Удалить
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       ТОВАРЫ
+    ========================= */
+
+    function renderProducts() {
+
+        const grid =
+            document.getElementById(
+                "productsGrid"
+            );
+
+
+        if (products.length === 0) {
+
+            grid.innerHTML = `
+                <div class="empty">
+                    Товаров пока нет.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        grid.innerHTML =
+            products
+                .map(createProductCard)
+                .join("");
+
+    }
+
+
+    /* =========================
+       ПОСЛЕДНИЕ ТОВАРЫ
+    ========================= */
+
+    function renderDashboardProducts() {
+
+        const grid =
+            document.getElementById(
+                "dashboardProducts"
+            );
+
+
+        if (products.length === 0) {
+
+            grid.innerHTML = `
+                <div class="empty">
+                    Добавьте первый товар.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        const lastProducts =
+            products.slice(-3).reverse();
+
+
+        grid.innerHTML =
+            lastProducts
+                .map(createProductCard)
+                .join("");
+
+    }
+
+
+    /* =========================
+       ДОБАВЛЕНИЕ / РЕДАКТИРОВАНИЕ
+    ========================= */
+
+    document
+        .getElementById("productForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const product = {
+
+                    id:
+                        editingProductId !== null
+                            ? editingProductId
+                            : Date.now(),
+
+                    name:
+                        document
+                            .getElementById("productName")
+                            .value
+                            .trim(),
+
+                    price:
+                        Number(
+                            document
+                                .getElementById("productPrice")
+                                .value
+                        ),
+
+                    category:
+                        document
+                            .getElementById("productCategory")
+                            .value,
+
+                    image:
+                        document
+                            .getElementById("productImage")
+                            .value
+                            .trim(),
+
+                    description:
+                        document
+                            .getElementById("productDescription")
+                            .value
+                            .trim()
+
+                };
+
+
+                if (editingProductId !== null) {
+
+                    const index =
+                        products.findIndex(
+                            item =>
+                                item.id === editingProductId
+                        );
+
+
+                    if (index !== -1) {
+
+                        products[index] =
+                            product;
+
+                    }
+
+
+                    alert(
+                        "Товар успешно изменён!"
+                    );
+
+                } else {
+
+                    products.push(product);
+
+                    alert(
+                        "Товар успешно добавлен!"
+                    );
+
+                }
+
+
+                saveProducts();
+
+
+                editingProductId = null;
+
+
+                document
+                    .getElementById("productForm")
+                    .reset();
+
+
+                document.getElementById(
+                    "formTitle"
+                ).textContent =
+                    "Добавить товар";
+
+
+                document.getElementById(
+                    "submitProductButton"
+                ).textContent =
+                    "ДОБАВИТЬ ТОВАР";
+
+
+                updateDashboard();
+
+
+                showPageById("products");
+
+            }
+        );
+
+
+    /* =========================
+       ИЗМЕНЕНИЕ
+    ========================= */
+
+    function editProduct(id) {
+
+        const product =
+            products.find(
+                item => item.id === id
+            );
+
+
+        if (!product) {
+            return;
+        }
+
+
+        editingProductId = id;
+
+
+        document.getElementById(
+            "productName"
+        ).value = product.name;
+
+
+        document.getElementById(
+            "productPrice"
+        ).value = product.price;
+
+
+        document.getElementById(
+            "productCategory"
+        ).value = product.category;
+
+
+        document.getElementById(
+            "productImage"
+        ).value = product.image;
+
+
+        document.getElementById(
+            "productDescription"
+        ).value =
+            product.description || "";
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Изменить товар";
+
+
+        document.getElementById(
+            "submitProductButton"
+        ).textContent =
+            "СОХРАНИТЬ ИЗМЕНЕНИЯ";
+
+
+        showPageById("addProduct");
+
+    }
+
+
+    /* =========================
+       ОТМЕНА РЕДАКТИРОВАНИЯ
+    ========================= */
+
+    function cancelEdit() {
+
+        editingProductId = null;
+
+
+        document
+            .getElementById("productForm")
+            .reset();
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Добавить товар";
+
+
+        document.getElementById(
+            "submitProductButton"
+        ).textContent =
+            "ДОБАВИТЬ ТОВАР";
+
+
+        showPageById("products");
+
+    }
+
+
+    /* =========================
+       УДАЛЕНИЕ
+    ========================= */
+
+    function deleteProduct(id) {
+
+        const product =
+            products.find(
+                item => item.id === id
+            );
+
+
+        if (!product) {
+            return;
+        }
+
+
+        const confirmed =
+            confirm(
+                "Удалить товар «" +
+                product.name +
+                "»?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        products =
+            products.filter(
+                item => item.id !== id
+            );
+
+
+        saveProducts();
+
+        updateDashboard();
+
+
+        alert(
+            "Товар удалён."
+        );
+
+    }
+
+
+    /* =========================
+       ЗАКАЗЫ
+    ========================= */
+
+    function renderOrders() {
+
+        const table =
+            document.getElementById(
+                "ordersTable"
+            );
+
+
+        if (orders.length === 0) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="5" class="empty">
+                        Заказов пока нет.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        table.innerHTML =
+            orders
+                .map(order => `
+
+                    <tr>
+
+                        <td>
+                            ${escapeHtml(String(order.id || "—"))}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(String(order.product || "—"))}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(String(order.name || "—"))}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(String(order.phone || "—"))}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(String(order.date || "—"))}
+                        </td>
+
+                    </tr>
+
+                `)
+                .join("");
+
+    }
+
+
+    /* =========================
+       ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+    ========================= */
+
+    function showPage(pageId, button) {
+
+        const pages =
+            document.querySelectorAll(".page");
+
+
+        pages.forEach(page => {
+            page.classList.remove("active");
+        });
+
+
+        document
+            .getElementById(pageId)
+            .classList.add("active");
+
+
+        const buttons =
+            document.querySelectorAll(".menu button");
+
+
+        buttons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+
+        if (button) {
+            button.classList.add("active");
+        }
+
+
+        const titles = {
+
+            dashboard:
+                "Панель управления",
+
+            products:
+                "Товары",
+
+            addProduct:
+                "Добавить товар",
+
+            orders:
+                "Заказы"
+
+        };
+
+
+        document.getElementById(
+            "pageTitle"
+        ).textContent =
+            titles[pageId] || "Админ-панель";
+
+
+        document
+            .getElementById("sidebar")
+            .classList.remove("open");
+
+    }
+
+
+    function showPageById(pageId) {
+
+        const buttons =
+            document.querySelectorAll(
+                ".menu button"
+            );
+
+
+        let selectedButton = null;
+
+
+        buttons.forEach(button => {
+
+            const text =
+                button.textContent.toLowerCase();
+
+
+            if (
+                (pageId === "dashboard" && text.includes("главная")) ||
+                (pageId === "products" && text.includes("товары")) ||
+                (pageId === "addProduct" && text.includes("добавить")) ||
+                (pageId === "orders" && text.includes("заказы"))
+            ) {
+
+                selectedButton = button;
+
+            }
+
+        });
+
+
+        showPage(
+            pageId,
+            selectedButton
+        );
+
+    }
+
+
+    /* =========================
+       МОБИЛЬНОЕ МЕНЮ
+    ========================= */
+
+    function toggleMenu() {
+
+        document
+            .getElementById("sidebar")
+            .classList.toggle("open");
+
+    }
+
+
+    /* =========================
+       ЗАЩИТА ТЕКСТА
+    ========================= */
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================
+       ПРОВЕРКА АВТОРИЗАЦИИ
+    ========================= */
+
+    window.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            const isAdmin =
+                localStorage.getItem(
+                    "centerLightAdmin"
+                );
+
+
+            if (isAdmin === "true") {
+
+                document.getElementById(
+                    "loginScreen"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "adminPanel"
+                ).style.display = "block";
+
+
+                loadData();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
